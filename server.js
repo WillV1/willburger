@@ -1,16 +1,32 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const session = require('express-session');
 require('dotenv').config()
 
 const PORT = process.env.PORT || 3001;
 
 //MIDDLEWARE
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 14
+  }
+}));
 app.use(cors());
 
+
 //CONTROLLER and ROUTES
+
+const routes = require('./routes');
+
+app.use('/register', routes.register);
+app.use('/auth', routes.auth);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
