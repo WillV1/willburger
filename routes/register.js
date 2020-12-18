@@ -9,6 +9,7 @@ const { User } = require('../models');
 //REGISTER NEW USER 
 
 router.post('/',  [
+  check('username', 'Username is required').exists(),
   check('email', 'Please include a valid email').isEmail(),
   check('password', 'Password is required').exists(),
 ], async (req,res) => {
@@ -18,7 +19,7 @@ router.post('/',  [
     return res.status(400).json({errors: errors.array()})
   }
 
-  const { email, password } = req.body;
+  const { username, email, password } = req.body;
 
   try {
 
@@ -29,7 +30,7 @@ router.post('/',  [
       return res.status(400).json({errors: [{msg: 'User already exists'}]})
     }
     user = new User({
-      email, password
+      username, email, password
     });
 
     //Hash password
