@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { returnErrors } from './error';
 
 import { 
   USER_LOADING,
@@ -28,12 +27,43 @@ export const loadUser = () => async (dispatch, getState) => {
       payload: response.data
     });
   } catch(err) {
-    dispatch(returnErrors(err.response.data, err.response.status));
+    
     dispatch({
       type: AUTH_ERROR
     });
   }
 };
+
+//REGISTER USER
+export const register = ({username, email, password }) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const body = JSON.stringify({username, email, password})
+
+  try {
+    const response = axios.post('/register', body, config)
+
+    dispatch({
+      type: REGISTER_SUCCESS,
+      payload: response.data
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if(errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg)))
+    }
+    dispatch({
+      type: REGISTER_FAIL
+    });
+  }
+  
+
+}
 
 //Set up config/headers and token
 export const tokenConfig = getState => {
@@ -56,3 +86,4 @@ export const tokenConfig = getState => {
 
     return config;
 }
+
