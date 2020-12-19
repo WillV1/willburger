@@ -2,6 +2,10 @@ import { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { loadUser } from './actions/auth';
 import { Provider } from 'react-redux';
+
+import Home from './pages/Home';
+import Register from './pages/Register';
+import Login from './pages/Login';
 import store from './store';
 
 import 'materialize-css/dist/css/materialize.min.css';

@@ -8,6 +8,6 @@ export const setAlert = (msg, alertType, timeout = 3000 ) => dispatch => {
     payload: {msg, alertType, id}
   });
 
-  setTimeout(() => dispatch({type: REMOVE_ALERT, payload, id}), timeout);
+  setTimeout(() => dispatch({type: REMOVE_ALERT, payload: id}), timeout);
 };
 

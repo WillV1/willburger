@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { register } from '../actions/auth';
 import { setAlert } from '../actions/alert';
 
-const Register = (register, isAuthenticated) => {
+const Register = ({setAlert, register, isAuthenticated}) => {
   const [ state, setState ] = useState({
     username: '',
     email: '',
