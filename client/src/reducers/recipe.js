@@ -1,4 +1,4 @@
-import { GET_RECIPES, RECIPE_ERROR } from './types';
+import { GET_RECIPES, RECIPE_ERROR } from '../actions/types';
 
 const initialState = {
   recipes: [],

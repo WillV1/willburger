@@ -1,4 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from '../actions/auth';
 import M from 'materialize-css';
@@ -22,7 +23,7 @@ const NavBar = ({auth: {isAuthenticated, user, loading}, logout}) => {
           <li><a href="sass.html">Place Order</a></li>
           <li><a href="badges.html">Locations</a></li>
           {/*} Dropdown Trigger */}
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><span>{user ? `Hi ${user.username} !`: ''}</span><i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a className="dropdown-trigger" href="#!" data-target="dropdown1"><span>{user ? `Hi ${user.username} !`: ''}</span><i class="material-icons right">arrow_drop_down</i></a></li>
         </ul>
     </Fragment>
   )
@@ -31,8 +32,8 @@ const NavBar = ({auth: {isAuthenticated, user, loading}, logout}) => {
     <div>
     
       <nav>
-      <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">WillBurger</a>
+      <div className="nav-wrapper">
+        <a href="#!" className="brand-logo">WillBurger</a>
         {!loading && <Fragment>{isAuthenticated ? authLinks : ''}</Fragment>}
       </div>
       </nav>
