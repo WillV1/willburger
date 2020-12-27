@@ -7,7 +7,7 @@ import NavBar from './components/NavBar';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import SearchPage from './pages/SearchPage';
+import Main from './pages/Main';
 
 import Alert from './components/Alert';
 
@@ -30,7 +30,7 @@ function App() {
           <Alert />
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/search' component={SearchPage} />
+            <Route path='/main' component={Main} />
             <Route path='/register' component={Register} />
             <Route path='/login' component={Login} />
           </Switch>

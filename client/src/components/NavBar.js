@@ -16,7 +16,7 @@ const NavBar = ({auth: {isAuthenticated, user, loading}, logout}) => {
 
       <ul id="nav-mobile" className="right hide-on-med-and-down">
         <span>{user ? `Hi ${user.username} !`: ''}</span>
-        <li><Link to="/search">Search New Recipes</Link></li>
+        <li><Link to="/main">Dashboard</Link></li>
         <li><a href="badges.html">Add Recipe</a></li>
         <li><a href="badges.html">Edit Recipe</a></li>
         <li><Link onClick={logout} to="/">Log Out</Link></li>       

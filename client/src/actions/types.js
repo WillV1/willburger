@@ -10,5 +10,5 @@ export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 
-export const GET_RECIPES = 'GET_RECIPES';
+export const SEARCH_RECIPES = 'SEARCH_RECIPES';
 export const RECIPE_ERROR = 'RECIPE_ERROR';
