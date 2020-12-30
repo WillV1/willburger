@@ -59,7 +59,7 @@ export const register = ({username, email, password }) => async dispatch => {
     const errors = err.response.data.errors;
 
     if(errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
     }
     dispatch({
       type: REGISTER_FAIL
@@ -101,9 +101,9 @@ export const login = (email, password) => async dispatch => {
   }
 }
 
-//LOGOUT
-export const logout = dispatch => {
-  dispatch({type: CLEAR_PROFILE});
-  dispatch({type: LOGOUT_SUCCESS})
+//log out
+export const logout = () => dispatch => {
+  dispatch({ type: CLEAR_PROFILE});
+  dispatch({ type: LOGOUT_SUCCESS });
 }
 
