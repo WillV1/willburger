@@ -28,9 +28,7 @@ const ctrl = require('./controllers');
 const routes = require('./routes');
 
 app.use('/users', ctrl.users);
-// app.use('/admin', ctrl.admin);
 // app.use('/recipes', ctrl.recipes);
-app.use('/register', routes.register);
 app.use('/auth', routes.auth);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

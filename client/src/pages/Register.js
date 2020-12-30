@@ -26,13 +26,13 @@ const Register = ({setAlert, register, isAuthenticated}) => {
     e.preventDefault();
 
     if(password !== password2){
-      setAlert('Passwords do not match')
+      setAlert('Passwords do not match', 'danger')
     } else {
       register({username, email, password})
     }
 
     setState({
-      name: '',
+      username: '',
       email: '',
       password: '',
       password2: ''
@@ -92,13 +92,12 @@ const Register = ({setAlert, register, isAuthenticated}) => {
 
 Register.propTypes = {
   isAuthenticated: PropTypes.bool,
-  error: PropTypes.object.isRequired,
+  setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  error: state.error
 })
 
-export default connect(mapStateToProps, {register})(Register);
+export default connect(mapStateToProps, {setAlert, register})(Register);

@@ -36,7 +36,7 @@ const NavBar = ({auth: {isAuthenticated, user, loading}, logout}) => {
   const guestLinks = (
     <Fragment>
 
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li><Link to="/register">Register</Link></li>
           <li><Link to="/login">Login</Link></li>
         </ul>

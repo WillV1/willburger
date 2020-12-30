@@ -1,5 +1,4 @@
 import { 
-USER_LOADING,
 USER_LOADED,
 AUTH_ERROR,
 LOGIN_SUCCESS,
@@ -12,7 +11,7 @@ REGISTER_FAIL,
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
-  isLoading: false,
+  loading: true,
   user: null
 };
 
@@ -20,11 +19,6 @@ export default function auth(state = initialState, action) {
   const { type, payload } = action;
 
     switch(type) {
-      case USER_LOADING:
-        return {
-          ...state,
-          isLoading: true
-        };
       case USER_LOADED:
         return {
           ...state,
@@ -39,7 +33,7 @@ export default function auth(state = initialState, action) {
           ...state,
           ...payload,
           isAuthenticated: true,
-          isLoading: false,
+          loading: false,
         };
       case AUTH_ERROR:
       case LOGIN_FAIL:
@@ -51,7 +45,7 @@ export default function auth(state = initialState, action) {
           token: null,
           user: null,
           isAuthenticated: false,
-          isLoading: false
+          loading: false
         };
       default:
         return state;

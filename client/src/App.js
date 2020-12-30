@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
 import { Provider } from 'react-redux';
 
 import NavBar from './components/NavBar';
@@ -16,11 +17,15 @@ import store from './store';
 import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
 
+if(localStorage.token) {
+  setAuthToken(localStorage.token)
+}
+
 function App() {
 
   useEffect(() => {
     store.dispatch(loadUser());
-  })
+  }, []);
 
   return (
     <Provider store={store}>

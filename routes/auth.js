@@ -7,69 +7,63 @@ const db = require('../models');
 const { User } = require('../models');
 const auth = require('../middleware/auth');
 
-//AUTHENTICATE USER 
 
-router.post('/',  [
+router.get('/', auth, async (req, res) => {
+
+  try {
+    const user = await User.findById(req.user.id).select('-password')
+    res.json(user)
+  } catch(err) {
+    console.error(err.message);
+    res.status(500).send('Server error')
+  }
+})
+
+//Authenticate user and get token
+
+router.post('/', [
   check('email', 'Please include a valid email').isEmail(),
-  check('password', 'Password is required').exists(),
-], async (req,res) => {
-
+  check('password', 'Password is required')
+  .exists()
+], 
+async (req,res) => {
   const errors = validationResult(req);
   if(!errors.isEmpty()) {
     return res.status(400).json({errors: errors.array()})
   }
 
   const { email, password } = req.body;
-
   try {
+  let user = await User.findOne({email});
 
-    //Check for existing user 
+  if(!user) {
+    return res.status(400).json({errors: [{msg: 'Invalid credentials'}]})
+  }
 
-    let user = await db.User.findOne({email});
-    if(!user){
-      return res.status(400).json({errors: [{msg: 'User does not exist'}]})
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  if(!isMatch) {
+    return res.status(400).json({errors: [{msg: 'Invalid credentials'}]})
+  }
+
+  const payload = {
+    user: {
+      id: user.id
     }
+  }
 
-    //Compare password to hashed password
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if(!isMatch) {
-      return res.status(400).json({errors: [{msg: 'Invalid credentials'}]});
-    }
-
-    const payload = {
-      user: {
-        id: user.id
-      }
-    }
-
-    const token = jwt.sign(
-      payload, 
-      process.env.SECRET,
-      { expiresIn: 3600},
-      )
-
-      res.json({token})
-
+  jwt.sign(payload, process.env.SECRET,
+  { expiresIn: 3600 },
+  ( err, token ) => {
+    if (err) throw err;
+    res.json({ token });
+  }
+  )
   } catch(err) {
     console.log(err.message);
-    res.status(500).send('Server error')
+    return res.status(500).send('Server error');
   }
-
 });
-
-//GET USER DATA
-
-router.get('/', auth, async (req, res) => {
-
-  try {
-    const user = await User.findById(req.user.id).select('-password');
-    res.json(user);
-  } catch(err) {
-    console.error(err.message);
-    res.status(500).send('Server error')
-  }
-})
 
 
 module.exports = router;

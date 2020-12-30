@@ -42,37 +42,37 @@ const Search = ({searchRecipes, recipe:{recipes, loading}}) => {
 
   return (
     <div>
-    <div class="row">
-    <form class="col s12" onSubmit={e => onSubmit(e)}>
-      <div class="row">
-        <div class="input-field col s12">
+    <div className="row">
+    <form className="col s12" onSubmit={e => onSubmit(e)}>
+      <div className="row">
+        <div className="input-field col s12">
           <input id="ingredient" type="text" 
           name="ingredient" value={ingredient}
           onChange={e => onChange(e)}
-          class="validate" />
-          <label for="ingredient">Ingredients</label>
+          className="validate" />
+          <label htmlFor="ingredient">Ingredients</label>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="query" type="text" class="validate" 
+      <div className="row">
+        <div className="input-field col s12">
+          <input id="query" type="text" className="validate" 
           onChange={e => onChange(e)}
           name="query" value={query}
           />
-          <label for="query">Food Query</label>
+          <label htmlFor="query">Food Query</label>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="page" type="number" class="validate" 
+      <div className="row">
+        <div className="input-field col s12">
+          <input id="page" type="number" className="validate" 
           onChange={e => onChange(e)}
           name="page" value={page}
           />
-          <label for="page">Search Page</label>
+          <label htmlFor="page">Search Page</label>
         </div>
       </div>
-      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-        <i class="material-icons right">send</i>
+      <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i className="material-icons right">send</i>
       </button>
     </form>
   </div>
